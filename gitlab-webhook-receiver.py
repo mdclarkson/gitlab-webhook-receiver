@@ -40,7 +40,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_token_mgmt(self, gitlab_token_header, json_payload):
         # Check if the gitlab token is valid
         if gitlab_token_header == self.gitlab_token:
-            logging.info("Start executing '%s'" % self.command)
+            logging.info("Start executing '%s'", self.command)
             try:
                 # run command in background
                 p = Popen(self.command, stdin=PIPE)

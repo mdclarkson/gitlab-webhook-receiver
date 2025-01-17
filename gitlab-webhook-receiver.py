@@ -9,6 +9,8 @@ import yaml
 from subprocess import Popen, PIPE, STDOUT
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter, FileType
 from importlib import import_module
+from security import safe_command
+
 try:
     # For Python 3.0 and later
     from http.server import HTTPServer
@@ -43,7 +45,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             logging.info("Start executing '%s'" % self.command)
             try:
                 # run command in background
-                p = Popen(self.command, stdin=PIPE)
+                p = safe_command.run(Popen, self.command, stdin=PIPE)
                 p.stdin.write(json_payload);
                 if self.foreground:
                     p.communicate()

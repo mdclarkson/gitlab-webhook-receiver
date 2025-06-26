@@ -145,7 +145,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.cfg:
-        config = yaml.load(args.cfg)
+        config = yaml.load(args.cfg, Loader=yaml.SafeLoader)
     elif args.modules:
         modules = [import_module(m, package=".") for m in args.modules]
 
